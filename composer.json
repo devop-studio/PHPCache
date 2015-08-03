@@ -1,0 +1,24 @@
+{
+    "name": "millennium/phpcache",
+    "description": "Implemented PHP Cache Drivers (apc, memcache, array or sample files)",
+    "keywords": ["php", "cache", "memcache", "apc"],
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Zlatko Hristov",
+            "email": "about@z-latko.info"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.7.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Millennium\\": "src"
+        }
+    }
+}
