@@ -1,9 +1,9 @@
 <?php
 
-namespace Millennium\Drivers;
+namespace Millennium\Cache\Drivers;
 
-use Millennium\Interfaces\CacheDriver;
-use Millennium\Exceptions\FileStorage\FileStorageMisconfiguration;
+use Millennium\Cache\Interfaces\CacheDriver;
+use Millennium\Cache\Exceptions\FileStorage\FileStorageMisconfiguration;
 
 class FileStorageDriver implements CacheDriver
 {
@@ -12,13 +12,13 @@ class FileStorageDriver implements CacheDriver
      *
      * @var string
      */
-    private $cachePath;
+    private $cachePath = './cache';
 
     /**
      *
      * @var integer
      */
-    private $expire;
+    private $expire = 3600;
 
     /**
      * 
@@ -35,7 +35,7 @@ class FileStorageDriver implements CacheDriver
             throw new FileStorageMisconfiguration("Please set path for file storage driver.");
         }
         if (!is_dir($options['path']) || !is_readable($options['path'])) {
-            throw new \Millennium\Exceptions\FileStorage\FileStorageDirectoryNotReadableException($options['path']);
+            throw new \Millennium\Cache\Exceptions\FileStorage\FileStorageDirectoryNotReadableException($options['path']);
         }
         $this->expire = isset($options['expire']) && ctype_digit($options['expire']) ? $options['expire'] : 3600;
         $this->cachePath = rtrim($options['path'], DIRECTORY_SEPARATOR);

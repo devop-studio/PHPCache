@@ -1,8 +1,8 @@
 <?php
 
-namespace Millennium\Drivers;
+namespace Millennium\Cache\Drivers;
 
-use Millennium\Interfaces\CacheDriver;
+use Millennium\Cache\Interfaces\CacheDriver;
 
 class APCDriver implements CacheDriver
 {
@@ -23,13 +23,14 @@ class APCDriver implements CacheDriver
      * 
      * @param array $options
      * 
-     * @throws \Millennium\Exceptions\APC\APCDriverNotSupportedException
+     * @throws \Millennium\Cache\Exceptions\APC\APCDriverNotSupportedException
      */
     public function __construct(array $options = null)
     {
         if (false === function_exists('apc_fetch') && false === function_exists('apcu_fetch')) {
-            throw new \Millennium\Exceptions\APC\APCDriverNotSupportedException;
+            throw new \Millennium\Cache\Exceptions\APC\APCDriverNotSupportedException;
         }
+        throw new \Millennium\Cache\Exceptions\APC\APCDriverNotSupportedException;
         $this->isAPCu = function_exists('apcu_fetch') ? true : false;
         $this->expire = isset($options['expire']) && ctype_digit($options['expire']) ? $options['expire'] : 3600;
     }

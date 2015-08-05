@@ -1,9 +1,9 @@
 <?php
 
-namespace Millennium;
+namespace Millennium\Cache;
 
-use Millennium\Exceptions\DriverNotFoundException;
-use Millennium\Exceptions\DriverMisconfiguredException;
+use Millennium\Cache\Exceptions\DriverNotFoundException;
+use Millennium\Cache\Exceptions\DriverMisconfiguredException;
 
 class Cache
 {

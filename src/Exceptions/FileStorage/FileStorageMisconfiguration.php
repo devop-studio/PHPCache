@@ -1,6 +1,6 @@
 <?php
 
-namespace Millennium\Exceptions\FileStorage;
+namespace Millennium\Cache\Exceptions\FileStorage;
 
 class FileStorageMisconfiguration extends \Exception
 {

@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Millennium\\": "src"
+            "Millennium\\Cache\\": "src"
         }
     }
 }

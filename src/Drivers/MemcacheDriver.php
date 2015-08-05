@@ -1,9 +1,9 @@
 <?php
 
-namespace Millennium\Drivers;
+namespace Millennium\Cache\Drivers;
 
-use Millennium\Interfaces\CacheDriver;
-use Millennium\Exceptions\Memcache\MemcacheDriverNotSupportedException;
+use Millennium\Cache\Interfaces\CacheDriver;
+use Millennium\Cache\Exceptions\Memcache\MemcacheDriverNotSupportedException;
 
 class MemcacheDriver implements CacheDriver
 {

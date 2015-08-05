@@ -1,6 +1,6 @@
 <?php
 
-namespace Millennium\Exceptions;
+namespace Millennium\Cache\Exceptions;
 
 class DriverMisconfiguredException extends \Exception
 {

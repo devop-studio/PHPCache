@@ -1,8 +1,8 @@
 <?php
 
-namespace Millennium\Drivers;
+namespace Millennium\Cache\Drivers;
 
-use Millennium\Interfaces\CacheDriver;
+use Millennium\Cache\Interfaces\CacheDriver;
 
 class ArrayDriver implements CacheDriver
 {
