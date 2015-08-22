@@ -3,7 +3,6 @@
 namespace Millennium\Cache\Drivers;
 
 use Millennium\Cache\Interfaces\CacheDriver;
-use Millennium\Cache\Exceptions\Memcache\MemcacheDriverNotSupportedException;
 
 class MemcacheDriver implements CacheDriver
 {
@@ -20,13 +19,14 @@ class MemcacheDriver implements CacheDriver
      */
     private $expire;
     
-    public function __construct(array $options = null)
+    public function __construct($_options = array())
     {
-        if (!class_exists('Memcache')) {
-            throw new MemcacheDriverNotSupportedException;
+        if (!class_exists('Memcached')) {
+            throw new \Millennium\Cache\Exceptions\DriverNotFoundException('Memcached not installed on your system');
         }
-        $this->memcache = new \Memcache;
-        $this->memcache->connect('127.0.0.1', 11211);
+        $options = array_merge(array('host' => '127.0.0.1', 'port' => '11211'), $_options);
+        $this->memcache = new \Memcache();
+        $this->memcache->connect($options['host'], $options['port']);
         $this->expire = isset($options['expire']) && ctype_digit($options['expire']) ? $options['expire'] : 3600;
     }
     
