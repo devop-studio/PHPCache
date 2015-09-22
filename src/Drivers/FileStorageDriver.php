@@ -12,7 +12,7 @@ class FileStorageDriver implements CacheDriver
      *
      * @var string
      */
-    private $cachePath = './cache';
+    private $cachePath;
 
     /**
      *
@@ -29,7 +29,7 @@ class FileStorageDriver implements CacheDriver
     public function __construct(array $options = null)
     {
         if (null === $options) {
-            throw new FileStorageMisconfiguration;
+            throw new FileStorageMisconfiguration();
         }
         if (!isset($options['path'])) {
             throw new FileStorageMisconfiguration("Please set path for file storage driver.");
@@ -37,7 +37,6 @@ class FileStorageDriver implements CacheDriver
         if (!is_dir($options['path']) || !is_readable($options['path'])) {
             throw new \Millennium\Cache\Exceptions\FileStorage\FileStorageDirectoryNotReadableException($options['path']);
         }
-        $this->expire = isset($options['expire']) && ctype_digit($options['expire']) ? $options['expire'] : 3600;
         $this->cachePath = rtrim($options['path'], DIRECTORY_SEPARATOR);
     }
 
@@ -50,12 +49,11 @@ class FileStorageDriver implements CacheDriver
     public function fetch($key)
     {
         if (file_exists($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache")) {
-            if (filemtime($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache") >= time() - $this->expire) {
-                return unserialize(file_get_contents($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache"));
+            list($expire, $data) = unserialize(file_get_contents($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache"));
+            if (filemtime($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache") <= $expire) {
+                return $data;
             }
-            else {
-                unlink($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache");
-            }
+            unlink($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache");
         }
         return false;
     }
@@ -81,12 +79,12 @@ class FileStorageDriver implements CacheDriver
      * 
      * @return boolean
      */
-    public function store($key, $data)
+    public function store($key, $data, $expire = 3600)
     {
         if (file_exists($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache")) {
             unlink($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache");
         }
-        return file_put_contents($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache", serialize($data));
+        return file_put_contents($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache", serialize(array(time() + $expire,$data)));
     }
 
 }

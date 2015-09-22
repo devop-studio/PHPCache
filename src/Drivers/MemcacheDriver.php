@@ -21,7 +21,7 @@ class MemcacheDriver implements CacheDriver
     
     public function __construct($_options = array())
     {
-        if (!class_exists('Memcached')) {
+        if (!class_exists('Memcache')) {
             throw new \Millennium\Cache\Exceptions\DriverNotFoundException('Memcached not installed on your system');
         }
         $options = array_merge(array('host' => '127.0.0.1', 'port' => '11211'), $_options);

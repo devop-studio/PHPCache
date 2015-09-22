@@ -2,10 +2,10 @@
     "name": "millennium/phpcache",
     "description": "Implemented PHP Cache Drivers (memcache, array or sample files)",
     "keywords": ["php", "cache", "memcache"],
-    "type": "library",
-    "license": "MIT",
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Zlatko Hristov",
@@ -14,7 +14,7 @@
     ],
     "require": {},
     "require-dev": {
-        "phpunit/phpunit": "4.8.5"
+        "phpunit/phpunit": "4.8.8"
     },
     "suggest": {
         "php-memcache":"*"
