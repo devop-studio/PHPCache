@@ -2,9 +2,9 @@
 
 namespace Millennium\Cache\Drivers;
 
-use Millennium\Cache\Interfaces\CacheDriver;
+use Millennium\Cache\Interfaces\CacheDriverInterface;
 
-class APCDriver implements CacheDriver
+class APCDriver implements CacheDriverInterface
 {
 
     private $isAPCu;

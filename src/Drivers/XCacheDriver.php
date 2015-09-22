@@ -2,9 +2,9 @@
 
 namespace Millennium\Cache\Drivers;
 
-use Millennium\Cache\Interfaces\CacheDriver;
+use Millennium\Cache\Interfaces\CacheDriverInterface;
 
-class XCacheDriver implements CacheDriver
+class XCacheDriver implements CacheDriverInterface
 {
 
     public function __construct()

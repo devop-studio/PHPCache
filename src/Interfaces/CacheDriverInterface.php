@@ -2,7 +2,7 @@
 
 namespace Millennium\Cache\Interfaces;
 
-interface CacheDriver
+interface CacheDriverInterface
 {
 
     public function fetch($key);

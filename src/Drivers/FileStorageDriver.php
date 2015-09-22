@@ -2,10 +2,10 @@
 
 namespace Millennium\Cache\Drivers;
 
-use Millennium\Cache\Interfaces\CacheDriver;
+use Millennium\Cache\Interfaces\CacheDriverInterface;
 use Millennium\Cache\Exceptions\FileStorage\FileStorageMisconfiguration;
 
-class FileStorageDriver implements CacheDriver
+class FileStorageDriver implements CacheDriverInterface
 {
 
     /**

@@ -10,7 +10,7 @@ class Cache
 
     /**
      *
-     * @var Interfaces\CacheDriver
+     * @var Interfaces\CacheDriverInterface
      */
     private $driver;
 
@@ -19,7 +19,7 @@ class Cache
         if (null === $driver) {
             throw new DriverMisconfiguredException;
         }
-        if (!$driver instanceof Interfaces\CacheDriver) {
+        if (!$driver instanceof Interfaces\CacheDriverInterface) {
             throw new DriverNotFoundException;
         }
         $this->driver = $driver;
@@ -27,7 +27,7 @@ class Cache
 
     /**
      * 
-     * @return Interfaces\CacheDriver
+     * @return Interfaces\CacheDriverInterface
      */
     public function getDriver()
     {

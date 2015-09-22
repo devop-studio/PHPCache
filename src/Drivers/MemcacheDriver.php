@@ -2,9 +2,9 @@
 
 namespace Millennium\Cache\Drivers;
 
-use Millennium\Cache\Interfaces\CacheDriver;
+use Millennium\Cache\Interfaces\CacheDriverInterface;
 
-class MemcacheDriver implements CacheDriver
+class MemcacheDriver implements CacheDriverInterface
 {
     
     /**
