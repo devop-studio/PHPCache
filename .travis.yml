@@ -9,11 +9,6 @@ php:
   - hhvm
   - nightly
   
-before_install:
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar self-update
-  - php composer.phar install
-  
 cache:
   directories:
     - $HOME/.composer/cache
@@ -21,13 +16,9 @@ cache:
 before_install:
   - composer self-update
   - composer validate
-
-install:
   - composer install --prefer-dist --no-interaction
-  
-script: 
-  vendor/bin/phpunit --coverage-clover=coverage.clover
 
-after_script:
-  wget https://scrutinizer-ci.com/ocular.phar
-  php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+script:
+  - vendor/bin/phpunit --coverage-clover=coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
