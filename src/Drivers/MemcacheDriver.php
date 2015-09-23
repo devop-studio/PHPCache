@@ -32,7 +32,7 @@ class MemcacheDriver implements CacheDriverInterface
     
     public function fetch($key)
     {
-        if (null != $this->memcache->get($key)) {
+        if (null !== $this->memcache->get($key)) {
             return $this->memcache->get($key);
         }
         return false;
