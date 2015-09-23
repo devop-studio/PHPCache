@@ -14,7 +14,9 @@ before_install:
   - php composer.phar self-update
   - php composer.phar install
 
-after_script:
+script: 
   phpunit --coverage-clover=coverage.clover
+
+after_script:
   wget https://scrutinizer-ci.com/ocular.phar
-  php ocular.phar code-coverage:upload --access-token="your-token" --format=php-clover coverage.clover
+  php ocular.phar code-coverage:upload --format=php-clover coverage.clover
