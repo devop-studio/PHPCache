@@ -15,12 +15,6 @@ class FileStorageDriver implements CacheDriverInterface
     private $cachePath;
 
     /**
-     *
-     * @var integer
-     */
-    private $expire = 3600;
-
-    /**
      * 
      * @param array $options
      * 
@@ -81,9 +75,6 @@ class FileStorageDriver implements CacheDriverInterface
      */
     public function store($key, $data, $expire = 3600)
     {
-        if (file_exists($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache")) {
-            unlink($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache");
-        }
         return file_put_contents($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache", serialize(array(time() + $expire,$data)));
     }
 
