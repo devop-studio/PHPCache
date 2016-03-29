@@ -2,6 +2,7 @@ checks:
     php:
         code_rating: true
         duplication: true
+        
 filter:
     excluded_paths:
         - vendor/*
@@ -9,3 +10,15 @@ filter:
 tools:
     external_code_coverage:
         timeout: 600
+
+build:
+    environment:
+        php:
+            version: 5.6.16
+    tests:
+        override:
+            -
+                command: phpunit --coverage-clover=clover-file
+                coverage:
+                    file: clover-file
+                    format: php-clover

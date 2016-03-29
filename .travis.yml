@@ -10,15 +10,6 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-build:
-    tests:
-        override:
-            -
-                command: 'phpunit --coverage-clover=clover.file'
-                coverage:
-                    file: 'clover.file'
-                    format: 'php-clover'
-
 before_install:
   - composer self-update
   - composer validate
