@@ -2,14 +2,12 @@
 
 namespace Millennium\Cache;
 
-use Millennium\Cache\Exceptions\DriverNotFoundException;
 use Millennium\Cache\Exceptions\DriverMisconfiguredException;
+use Millennium\Cache\Exceptions\DriverNotFoundException;
 
 class Cache
 {
-
     /**
-     *
      * @var Interfaces\CacheDriverInterface
      */
     private $driver;
@@ -17,16 +15,15 @@ class Cache
     public function __construct($driver = null)
     {
         if (null === $driver) {
-            throw new DriverMisconfiguredException;
+            throw new DriverMisconfiguredException();
         }
         if (!$driver instanceof Interfaces\CacheDriverInterface) {
-            throw new DriverNotFoundException;
+            throw new DriverNotFoundException();
         }
         $this->driver = $driver;
     }
 
     /**
-     * 
      * @return Interfaces\CacheDriverInterface
      */
     public function getDriver()
@@ -35,9 +32,8 @@ class Cache
     }
 
     /**
-     * 
      * @param string $key
-     * 
+     *
      * @return array
      */
     public function fetch($key)
@@ -46,11 +42,10 @@ class Cache
     }
 
     /**
-     * 
      * @param string $key
-     * @param array $data
-     * 
-     * @return boolean
+     * @param array  $data
+     *
+     * @return bool
      */
     public function store($key, $data)
     {
@@ -58,14 +53,12 @@ class Cache
     }
 
     /**
-     * 
      * @param string $key
-     * 
-     * @return boolean
+     *
+     * @return bool
      */
     public function remove($key)
     {
         return $this->getDriver()->remove($key);
     }
-
 }
