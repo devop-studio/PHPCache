@@ -6,7 +6,6 @@ use Millennium\Cache\Interfaces\CacheDriverInterface;
 
 class APCDriver implements CacheDriverInterface
 {
-
     private $isAPCu;
 
     public function __construct()
@@ -31,5 +30,4 @@ class APCDriver implements CacheDriverInterface
     {
         return $this->isAPCu ? apcu_store($key, $data, $expire) : apc_store($key, $data, $expire);
     }
-
 }

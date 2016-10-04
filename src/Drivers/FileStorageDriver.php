@@ -2,22 +2,19 @@
 
 namespace Millennium\Cache\Drivers;
 
-use Millennium\Cache\Interfaces\CacheDriverInterface;
 use Millennium\Cache\Exceptions\FileStorage\FileStorageMisconfiguration;
+use Millennium\Cache\Interfaces\CacheDriverInterface;
 
 class FileStorageDriver implements CacheDriverInterface
 {
-
     /**
-     *
      * @var string
      */
     private $cachePath;
 
     /**
-     * 
      * @param array $options
-     * 
+     *
      * @throws FileStorageMisconfiguration
      */
     public function __construct(array $options = null)
@@ -26,7 +23,7 @@ class FileStorageDriver implements CacheDriverInterface
             throw new FileStorageMisconfiguration();
         }
         if (!isset($options['path'])) {
-            throw new FileStorageMisconfiguration("Please set path for file storage driver.");
+            throw new FileStorageMisconfiguration('Please set path for file storage driver.');
         }
         if (!is_dir($options['path']) || !is_readable($options['path'])) {
             throw new \Millennium\Cache\Exceptions\FileStorage\FileStorageDirectoryNotReadableException($options['path']);
@@ -35,47 +32,45 @@ class FileStorageDriver implements CacheDriverInterface
     }
 
     /**
-     * 
      * @param string $key
-     * 
-     * @return boolean
+     *
+     * @return bool
      */
     public function fetch($key)
     {
-        if (file_exists($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache")) {
-            list($expire, $data) = unserialize(file_get_contents($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache"));
-            if (filemtime($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache") <= $expire) {
+        if (file_exists($this->cachePath.DIRECTORY_SEPARATOR.$key.'.cache')) {
+            list($expire, $data) = unserialize(file_get_contents($this->cachePath.DIRECTORY_SEPARATOR.$key.'.cache'));
+            if (filemtime($this->cachePath.DIRECTORY_SEPARATOR.$key.'.cache') <= $expire) {
                 return $data;
             }
-            unlink($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache");
+            unlink($this->cachePath.DIRECTORY_SEPARATOR.$key.'.cache');
         }
+
         return false;
     }
 
     /**
-     * 
      * @param string $key
-     * 
-     * @return boolean
+     *
+     * @return bool
      */
     public function remove($key)
     {
-        if (file_exists($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache")) {
-            unlink($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache");
+        if (file_exists($this->cachePath.DIRECTORY_SEPARATOR.$key.'.cache')) {
+            unlink($this->cachePath.DIRECTORY_SEPARATOR.$key.'.cache');
         }
+
         return true;
     }
 
     /**
-     * 
      * @param string $key
-     * @param array $data
-     * 
-     * @return boolean
+     * @param array  $data
+     *
+     * @return bool
      */
     public function store($key, $data, $expire = 3600)
     {
-        return file_put_contents($this->cachePath . DIRECTORY_SEPARATOR . $key . ".cache", serialize(array(time() + $expire,$data)));
+        return file_put_contents($this->cachePath.DIRECTORY_SEPARATOR.$key.'.cache', serialize([time() + $expire, $data]));
     }
-
 }

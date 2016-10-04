@@ -6,7 +6,6 @@ use Millennium\Cache\Interfaces\CacheDriverInterface;
 
 class XCacheDriver implements CacheDriverInterface
 {
-
     public function __construct()
     {
         if (!function_exists('xcache_isset')) {
@@ -19,7 +18,6 @@ class XCacheDriver implements CacheDriverInterface
         if (xcache_isset($key)) {
             return xcache_get($key);
         }
-        return null;
     }
 
     public function remove($key)
@@ -33,5 +31,4 @@ class XCacheDriver implements CacheDriverInterface
     {
         return xcache_set($key, $data, $expire);
     }
-
 }
